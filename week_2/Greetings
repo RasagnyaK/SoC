@@ -1,0 +1,75 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+long long merge_count(vector<long long>& a, long long l, long long r){
+    if(l >= r) return 0;
+
+    long long mid = (l + r) / 2;
+    long long ans = 0;
+
+    ans += merge_count(a, l, mid);
+    ans += merge_count(a, mid + 1, r);
+
+    vector<long long> temp;
+
+    long long i = l;
+    long long j = mid + 1;
+
+    while(i <= mid && j <= r){
+        if(a[i] <= a[j]){
+            temp.push_back(a[i]);
+            i++;
+        }
+        else{
+            ans += (mid - i + 1);
+            temp.push_back(a[j]);
+            j++;
+        }
+    }
+
+    while(i <= mid){
+        temp.push_back(a[i]);
+        i++;
+    }
+
+    while(j <= r){
+        temp.push_back(a[j]);
+        j++;
+    }
+
+    for(long long k = l; k <= r; k++){
+        a[k] = temp[k - l];
+    }
+
+    return ans;
+}
+
+int main(){
+    long long t;
+    cin >> t;
+
+    while(t--){
+        long long n;
+        cin >> n;
+
+        vector<vector<long long>> y(n, vector<long long>(2));
+
+        for(long long i = 0; i < n; i++){
+            cin >> y[i][0] >> y[i][1];
+        }
+
+        sort(y.begin(), y.end());
+
+        vector<long long> b(n);
+
+        for(long long i = 0; i < n; i++){
+            b[i] = y[i][1];
+        }
+
+        long long ans = merge_count(b, 0, n - 1);
+
+        cout << ans << "\n";
+    }
+}
