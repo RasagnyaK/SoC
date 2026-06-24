@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+
+    for (int i = 0; i < t; i++) {
+
+        int n;
+        cin >> n;
+        vector<pair<long long,int>> b(n);
+        for (int j = 0; j < n; j++) {
+            cin >> b[j].first;
+            b[j].second = j;
+        }
+        sort(b.begin(), b.end());
+        vector<long long> x(n);
+        x[0] = b[0].first;
+        for (int j = 1; j < n; j++) {
+            x[j] = x[j - 1] + b[j].first;
+        }
+        vector<long long> count(n);
+        count[n - 1] = n - 1;
+        for (int j = n - 2; j >= 0; j--) {
+            if (x[j] >= b[j + 1].first) {
+                count[j] = count[j + 1];
+            }
+            else {
+                count[j] = j;
+            }
+        }
+        vector<long long> a(n);
+        for (int j = 0; j < n; j++) {
+            a[b[j].second] = count[j];
+        }
+        for (int j = 0; j < n; j++) {
+            cout << a[j] << " ";
+        }
+        cout << "\n";
+    }
+}
