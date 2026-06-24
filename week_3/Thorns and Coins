@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+int main(){
+    long long t;
+    cin >> t;
+
+    vector<long long> a(t);
+
+    for(long long i=0;i<t;i++){
+        cin >> a[i];
+
+        string b;
+        cin >> b;
+        long long count = 0;
+
+        for(long long k = 0; k < a[i]; k++){
+
+            if(k < a[i]-1 && b[k]=='*' && b[k+1]=='*'){
+                break;
+            }
+
+            if(b[k]=='@'){
+                count++;
+            }
+        }
+        cout << count << "\n" ;
+    }
+}
