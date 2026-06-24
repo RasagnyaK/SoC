@@ -1,0 +1,39 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+const long long MOD = 1000000007;
+long long dp[105];
+
+long long F(long long n, long long k)
+{
+    if(n == 0) return 1;
+    if(n < 0) return 0;
+
+    if(dp[n] != -1)
+        return dp[n];
+
+    long long ans = 0;
+
+    for(long long i = 1; i <= k; i++)
+    {
+        ans = (ans + F(n - i, k)) % MOD;
+    }
+
+    return dp[n] = ans;
+}
+
+int main()
+{
+    long long n, k, d;
+    cin >> n >> k >> d;
+
+    fill(dp, dp + 105, -1);
+    long long total = F(n, k);
+
+    fill(dp, dp + 105, -1);
+    long long bad = F(n, d - 1);
+
+    cout << (total - bad + MOD) % MOD << "\n";
+}
