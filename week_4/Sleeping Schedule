@@ -1,0 +1,45 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int main(){
+    long long n,h,l,r;
+    cin >> n >> h >> l >> r;
+    vector<long long> a(n);
+    for(long long i=0;i<n;i++){
+        cin >> a[i];
+    }
+    vector<vector<int>> dp(n + 1, vector<int>(h, -1));
+    dp[0][0] = 0;
+        for (int i = 0; i < n; i++) {
+
+        for (int hour = 0; hour < h; hour++) {
+
+            if (dp[i][hour] == -1)
+                continue;
+
+            // choose a[i]
+            int h1 = (hour + a[i]) % h;
+            int gain1 = (l <= h1 && h1 <= r);
+
+            dp[i + 1][h1] =
+                max(dp[i + 1][h1],
+                    dp[i][hour] + gain1);
+
+            // choose a[i] - 1
+            int h2 = (hour + a[i] - 1) % h;
+            int gain2 = (l <= h2 && h2 <= r);
+
+            dp[i + 1][h2] =
+                max(dp[i + 1][h2],
+                    dp[i][hour] + gain2);
+        }
+    }
+
+    int ans = 0;
+
+    for (int hour = 0; hour < h; hour++) {
+        ans = max(ans, dp[n][hour]);
+    }
+
+    cout << ans << "\n";
+}
