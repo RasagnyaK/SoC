@@ -1,0 +1,37 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+int main(){
+    int n;
+    cin >> n;
+    string a="";
+    int p=-1,q=-1;
+    for(int i=0;i<=n/7;i++){
+        int x;
+        x = n-7*i;
+        if(x%4 == 0){
+            int y;
+            y = x/4;
+            p = y;
+            q = i;
+        }
+    }
+    string s;
+            for(int j=0;j<p;j++){
+                s += '4';
+            }
+            for(int j=0;j<q;j++){
+                s += '7';
+            }
+            if(a=="" || s.length()<a.length()){
+                a = s;
+            }
+    if(a==""){
+        cout << "-1";
+    }
+    else{
+        cout << a;
+    }
+    return 0;
+    }
