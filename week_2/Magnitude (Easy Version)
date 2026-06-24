@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+int main() {
+    long long t;
+    cin >> t;
+
+    while (t--) {
+        long long n;
+        cin >> n;
+
+        vector<long long> a(n);
+        for (long long i = 0; i < n; i++) {
+            cin >> a[i];
+        }
+
+        long long pos = 0, neg = 0;
+
+        for (long long i = 0; i < n; i++) {
+            long long x = a[i];
+
+            long long new_pos = max(pos + x, llabs(neg + x));
+            long long new_neg = min(pos + x, neg + x);
+
+            pos = new_pos;
+            neg = new_neg;
+        }
+
+        cout << max(pos, llabs(neg)) << "\n";
+    }
+}
