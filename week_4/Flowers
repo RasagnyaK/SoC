@@ -1,0 +1,32 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+const long long MOD = 1000000007;
+long long dp[100005];
+long long F(long long n,long long k){
+    if(n == 0) return 1;
+    if(n < 0) return 0;
+    if(dp[n] != -1)
+        return dp[n];
+    long long ans=0;
+    ans = (F(n-1,k)+F(n-k,k))%MOD;
+    return dp[n]=ans;
+}
+int main(){
+    long long t,k;
+    cin >> t >> k;
+    fill(dp,dp + 100005,-1);
+    vector<long long> pref(100001);
+        pref[0]=0;
+    for(int i=1;i<=100000;i++){
+            pref[i]=(pref[i-1]+F(i,k))%MOD;
+    }
+    for(long long i=0;i<t;i++){
+        long long a,b;
+        cin >> a >> b;
+        long long count=0;
+        count = (pref[b]-pref[a-1]+MOD)%MOD;
+        cout << count << "\n";
+    }
+}
