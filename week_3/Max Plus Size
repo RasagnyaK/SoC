@@ -1,0 +1,64 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main(){
+    long long t;
+    cin >> t;
+
+    vector<long long> a(t);
+
+    for(long long i=0;i<t;i++){
+        cin >> a[i];
+
+        vector<long long> b(a[i]);
+
+        for(long long j=0;j<a[i];j++){
+            cin >> b[j];
+        }
+
+        long long c = 0;
+        long long d = 0;
+
+        if(a[i]%2==0){
+            vector<long long> e(a[i]/2);
+            vector<long long> f(a[i]/2);
+
+            for(long long j=0;j<(a[i]/2);j++){
+                e[j] = b[2*j];
+            }
+
+            for(long long j=0;j<(a[i]/2);j++){
+                f[j] = b[2*j+1];
+            }
+
+            c += *max_element(e.begin(),e.end()) + (a[i]/2);
+            d += *max_element(f.begin(),f.end()) + (a[i]/2);
+
+            cout << max(c,d) << "\n";
+        }
+        else{
+            vector<long long> g((a[i]+1)/2);
+            vector<long long> h((a[i]-1)/2);
+
+            for(long long j=0;j<((a[i]+1)/2);j++){
+                g[j] = b[2*j];
+            }
+
+            for(long long j=0;j<((a[i]-1)/2);j++){
+                h[j] = b[2*j+1];
+            }
+
+            c += *max_element(g.begin(),g.end()) + ((a[i]+1)/2);
+
+            if(!h.empty()){
+                d += *max_element(h.begin(),h.end()) + ((a[i]-1)/2);
+            }
+
+            cout << max(c,d) << "\n";
+        }
+    }
+
+    return 0;
+}
