@@ -1,0 +1,44 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include <cmath>
+#include <cctype>
+using namespace std;
+int main(){
+    long long t;
+    cin >> t;
+    vector<long long> a(t);
+    vector<long long> b(t);
+    for(long long i=0;i<t;i++){
+        cin >> a[i] >> b[i];
+        vector<long long> c(a[i]);
+        vector<long long> d(a[i]);
+        for(long long j=0;j<a[i];j++){
+            cin >> c[j];
+        }
+        for(long long j=0;j<a[i];j++){
+            cin >> d[j];
+        }
+        vector<pair<long long,long long>> v;
+        for(long long j=0;j<a[i];j++){
+            v.push_back({abs(d[j]),c[j]});
+        }
+        sort(v.begin(),v.end());
+        long long sum=0;
+        bool ok=true;
+        for(long long j=0;j<a[i];j++){
+            sum += v[j].second;
+            if(sum > b[i]*v[j].first){
+                ok = false;
+                break;
+            }
+        }
+        if(ok){
+            cout << "YES" << "\n";
+        }
+        else{
+            cout << "NO" << "\n";
+        }
+    }
+}
