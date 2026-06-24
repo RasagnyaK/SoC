@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main(){
+    long long t;
+    cin >> t;
+    vector<long long> a(t);
+    for(long long i=0;i<t;i++){
+        cin >> a[i];
+        vector<long long> b(a[i]);
+        for(long long x=0;x<a[i];x++){
+            cin >> b[x];
+        }
+        sort(b.begin(),b.end());
+        vector<long long> c;
+
+        c.push_back(b[0]);
+
+        for(long long j=1;j<a[i];j++){
+            if(b[j] != b[j-1]){
+                c.push_back(b[j]);
+            }
+        }
+        vector<pair<long long, long long>> events;
+
+        for(long long j = 0; j < c.size(); j++) {
+            long long l = c[j] + 1;
+            long long r = c[j] + a[i];
+
+            events.push_back({l, 1});
+            events.push_back({r + 1, -1});
+        }
+
+        sort(events.begin(), events.end());
+
+        long long cur = 0;
+        long long ans = 0;
+
+        for(long long j = 0; j < events.size(); j++) {
+            cur += events[j].second;
+            ans = max(ans, cur);
+        }
+
+        cout << ans << endl;
+    }
+}
