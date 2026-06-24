@@ -1,0 +1,22 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main(){
+    long long t;
+    cin >> t;
+    vector<int> a(t);
+    for(long long i=0;i<t;i++){
+        cin >> a[i];
+        vector<int> b(a[i]);
+        for(int j=0;j<a[i];j++){
+            cin >> b[j];
+        }
+        long long maxPos = max_element(b.begin(), b.end()) - b.begin() + 1;
+        long long minPos = min_element(b.begin(), b.end()) - b.begin() + 1;
+        long long l = min(maxPos, minPos);
+        long long r = max(maxPos, minPos);
+
+        cout << min({r, a[i] - l + 1, l + a[i] - r + 1}) << "\n";
+    }
+}
