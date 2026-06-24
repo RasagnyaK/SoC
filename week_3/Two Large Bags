@@ -1,0 +1,39 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+#include <string>
+#include <map>
+using namespace std;
+int main(){
+    long long t;
+    cin >> t;
+    vector<long long> a(t);
+    for(long long i=0;i<t;i++){
+        cin >> a[i];
+        vector<long long> b(a[i]);
+        for(long long j=0;j<a[i];j++){
+            cin >> b[j];
+        }
+        sort(b.begin(),b.end());
+        vector<long long> cnt(a[i] + 2, 0);
+
+        for(long long x : b){
+            cnt[x]++;
+        }
+
+        bool ok = true;
+
+        for(long long j = 1; j <= a[i]; j++){
+            if(cnt[j] == 1){
+                ok = false;
+                break;
+            }
+
+            if(cnt[j] >= 2){
+                cnt[j + 1] += cnt[j] - 2;
+            }
+        }
+
+        cout << (ok ? "YES" : "NO") << "\n";
+    }       
+}
