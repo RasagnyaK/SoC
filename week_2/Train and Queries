@@ -1,0 +1,47 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <map>
+using namespace std;
+
+int main(){
+    int t;
+    cin >> t;
+
+    while(t--){
+        long long n,m;
+        cin >> n >> m;
+
+        vector<long long> x(n);
+
+        map<long long,long long> firstpos;
+        map<long long,long long> lastpos;
+
+        for(long long i=0;i<n;i++){
+            cin >> x[i];
+
+            if(firstpos.find(x[i]) == firstpos.end()){
+                firstpos[x[i]] = i;
+            }
+
+            lastpos[x[i]] = i;
+        }
+
+        for(long long i=0;i<m;i++){
+            long long u,v;
+            cin >> u >> v;
+
+            if(firstpos.find(u) != firstpos.end() &&
+               lastpos.find(v) != lastpos.end() &&
+               firstpos[u] <= lastpos[v])
+            {
+                cout << "YES\n";
+            }
+            else{
+                cout << "NO\n";
+            }
+        }
+    }
+
+    return 0;
+}
