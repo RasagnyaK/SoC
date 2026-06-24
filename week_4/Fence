@@ -1,0 +1,27 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main(){
+    long long n,k;
+    cin >> n >> k;
+    vector<long long> a(n);
+    for(long long i=0;i<n;i++){
+        cin >> a[i];
+    }
+    long long curr=0;
+    long long best=0;
+    long long index=0;
+    for(long long i=0;i<k;i++){
+        curr+=a[i];
+    }
+    best=curr;
+    for(long long i=0;i<n-k;i++){
+        curr = curr-a[i]+a[i+k];
+        if(curr<best){
+            index = i+1;
+            best=curr;
+        }
+    }
+    cout << index+1 << "\n";
+}
