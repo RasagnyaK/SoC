@@ -1,6 +1,45 @@
-# SoC
-This repository contains the problems I solved while learning competitive programming in C++.
+# SOC Journey
 
-During this journey, I worked on topics such as Binary Search, Greedy Algorithms, Dynamic Programming, and Divide and Conquer. I also learned to use C++ STL more effectively and became more comfortable with writing clean and efficient code.
+This repository contains solutions to problems I solved while learning competitive programming and strengthening my algorithmic thinking in C++.
 
-Solving these problems helped me improve my problem-solving skills, understand time and space complexity better, and learn how to optimize solutions to avoid Time Limit Exceeded (TLE) errors.
+## Core Programming Concepts
+
+* Time Complexity
+* C++ STL
+
+## Searching and Array Techniques
+
+* Binary Search
+* Two Pointers
+* Sliding Window
+
+## Mathematical Foundations
+
+* GCD & LCM
+* Modular Arithmetic
+* Fast Exponentiation
+* Sieve of Eratosthenes
+* Modular Inverse
+* Basic Combinatorics
+
+## Greedy Strategies
+
+* Greedy Algorithms
+* Constructive Problems
+
+## Dynamic Programming and Recursion
+
+* Recursion
+* Memoization
+* Tabulation
+* Coin Change
+* Knapsack
+* Longest Increasing Subsequence
+* 2D Dynamic Programming
+
+## Advanced Problem Solving
+
+* Divide and Conquer
+* Optimization Techniques
+* Time Complexity Analysis
+* Avoiding TLE
