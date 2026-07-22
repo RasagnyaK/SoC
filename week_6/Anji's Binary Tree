@@ -1,0 +1,50 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<pair<int,int>> tree;
+string s;
+
+int dfs(int node)
+{
+    int left = tree[node].first;
+    int right = tree[node].second;
+
+    // leaf
+    if(left == 0 && right == 0)
+        return 0;
+
+    int ans = 1e9;
+
+    if(left)
+        ans = min(ans, dfs(left) + (s[node-1] != 'L'));
+
+    if(right)
+        ans = min(ans, dfs(right) + (s[node-1] != 'R'));
+
+    return ans;
+}
+
+int main()
+{
+    int t;
+    cin >> t;
+
+    while(t--)
+    {
+        int n;
+        cin >> n;
+
+        cin >> s;
+
+        tree.assign(n+1,{0,0});
+
+        for(int i=1;i<=n;i++)
+        {
+            int l,r;
+            cin >> l >> r;
+            tree[i]={l,r};
+        }
+
+        cout << dfs(1) << "\n";
+    }
+}
