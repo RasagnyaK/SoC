@@ -1,0 +1,15 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main(){
+    long long t;
+    cin >> t;
+    vector<pair<long long,long long>> test(t);
+    for(long long i=0;i<t;i++){
+        cin >> test[i].first >> test[i].second;
+        long long x;
+        x = test[i].second+((test[i].second-1)/(test[i].first-1));
+        cout << x << "\n";
+    }
+}
