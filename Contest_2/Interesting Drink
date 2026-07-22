@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+int main(){
+    long long n;
+    cin >> n;
+    vector<long long> x(n);
+    for(long long i=0;i<n;i++){
+        cin >> x[i];
+    }
+    long long q;
+    cin >> q;
+    vector<long long> m(q);
+    for(long long i=0;i<q;i++){
+        cin >> m[i];
+    }
+    sort(x.begin(),x.end());
+    for (long long i = 0; i < q; i++){
+        long long low = 0;
+        long long high = n - 1;
+        long long ans = n;   // Assume all shops are affordable
+
+        while (low <= high)
+        {
+            long long mid = (low + high) / 2;
+
+            if (x[mid] <= m[i])
+            {
+                low = mid + 1;
+            }
+            else
+            {
+                ans = mid;
+                high = mid - 1;
+            }
+        }
+
+        cout << ans << "\n";
+    }
+}
