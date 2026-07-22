@@ -1,0 +1,51 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n;
+        cin >> n;
+
+        vector<long long> a(n);
+        vector<long long> b(n);
+
+        for (int i = 0; i < n; i++) {
+            cin >> a[i];
+        }
+
+        for (int i = 0; i < n; i++) {
+            cin >> b[i];
+        }
+
+        vector<long long> c(n);
+
+        long long mx = -(long long)4e18;
+
+        for (int i = 0; i < n; i++) {
+            c[i] = a[i] - b[i];
+            mx = max(mx, c[i]);
+        }
+
+        vector<int> ans;
+
+        for (int i = 0; i < n; i++) {
+            if (c[i] == mx) {
+                ans.push_back(i + 1);
+            }
+        }
+
+        cout << ans.size() << '\n';
+
+        for (int x : ans) {
+            cout << x << " ";
+        }
+
+        cout << '\n';
+    }
+
+    return 0;
+}
