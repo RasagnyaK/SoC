@@ -1,0 +1,70 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void dfs(int node, vector<vector<int>> &adj, vector<int> &vis,
+         vector<int> &color, unordered_map<int, int> &cnt, int &sz)
+{
+    vis[node] = 1;
+    sz++;
+    cnt[color[node]]++;
+
+    for (int next : adj[node])
+    {
+        if (!vis[next])
+        {
+            dfs(next, adj, vis, color, cnt, sz);
+        }
+    }
+}
+
+int main()
+{
+    int n, m, k;
+    cin >> n >> m >> k;
+
+    vector<int> color(n + 1);
+
+    for (int i = 1; i <= n; i++)
+    {
+        cin >> color[i];
+    }
+
+    vector<vector<int>> adj(n + 1);
+
+    for (int i = 0; i < m; i++)
+    {
+        int u, v;
+        cin >> u >> v;
+
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+    vector<int> vis(n + 1, 0);
+
+    int ans = 0;
+
+    for (int i = 1; i <= n; i++)
+    {
+        if (!vis[i])
+        {
+            unordered_map<int, int> cnt;
+            int sz = 0;
+
+            dfs(i, adj, vis, color, cnt, sz);
+
+            int mx = 0;
+
+            for (auto x : cnt)
+            {
+                mx = max(mx, x.second);
+            }
+
+            ans += sz - mx;
+        }
+    }
+
+    cout << ans << '\n';
+
+    return 0;
+}
