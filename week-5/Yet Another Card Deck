@@ -1,0 +1,41 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    long long n, q;
+    cin >> n >> q;
+
+    vector<long long> a(n);
+    vector<long long> b(q);
+
+    for (long long i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+
+    for (long long i = 0; i < q; i++) {
+        cin >> b[i];
+    }
+
+    for (long long r = 0; r < q; r++) {
+
+        long long pos = 0;
+
+        while (a[pos] != b[r]) {
+            pos++;
+        }
+
+        cout << pos + 1 << " ";
+
+        long long color = a[pos];
+
+        while (pos > 0) {
+            a[pos] = a[pos - 1];
+            pos--;
+        }
+
+        a[0] = color;
+    }
+
+    return 0;
+}
