@@ -1,0 +1,108 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<vector<int>> adj;
+vector<pair<int, int>> ans;
+int root;
+
+int dfs(int node, int parent)
+{
+    bool leaf = true;
+    vector<int> ends;
+
+    for (int next : adj[node])
+    {
+        if (next == parent)
+            continue;
+
+        leaf = false;
+        int x = dfs(next, node);
+
+        if (x != -1)
+            ends.push_back(x);
+    }
+
+    if (leaf)
+        return node;
+
+    if (node == root)
+    {
+        if (ends.size() % 2 == 1)
+            ends.push_back(root);
+
+        for (int i = 0; i < ends.size(); i += 2)
+            ans.push_back({ends[i], ends[i + 1]});
+
+        return -1;
+    }
+
+    while (ends.size() >= 2)
+    {
+        int a = ends.back();
+        ends.pop_back();
+
+        int b = ends.back();
+        ends.pop_back();
+
+        ans.push_back({a, b});
+    }
+
+    if (ends.empty())
+        return -1;
+
+    return ends[0];
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+
+    adj.resize(n + 1);
+
+    vector<int> deg(n + 1);
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        int u, v;
+        cin >> u >> v;
+
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+
+        deg[u]++;
+        deg[v]++;
+    }
+
+    root = 1;
+
+    int cnt = 0;
+
+    for (int i = 1; i <= n; i++)
+    {
+        if (deg[i] > 2)
+        {
+            cnt++;
+            root = i;
+        }
+    }
+
+    if (cnt > 1)
+    {
+        cout << "No\n";
+        return 0;
+    }
+
+    cout << "Yes\n";
+
+    dfs(root, 0);
+
+    cout << ans.size() << '\n';
+
+    for (auto p : ans)
+    {
+        cout << p.first << " " << p.second << '\n';
+    }
+
+    return 0;
+}
