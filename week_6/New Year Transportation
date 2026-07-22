@@ -1,0 +1,22 @@
+#include <iostream>
+#include <string>
+#include <algorithm>
+#include <vector>
+using namespace std;
+int main(){
+    long long n,t;
+    cin >> n >> t;
+    vector<long long> a(n-1);
+    for(long long i=0;i<n-1;i++){
+        cin >> a[i];
+    }
+    long long x=1;
+    while (x < t) {
+    x += a[x - 1];
+    }
+
+    if (x == t)
+        cout << "YES";
+    else
+        cout << "NO";
+    }
